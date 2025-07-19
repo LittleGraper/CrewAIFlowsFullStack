@@ -2,13 +2,14 @@
 import os
 # 导入第三方库
 from crewai import LLM
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 # 模型全局参数配置  根据自己的实际情况进行调整
 # openai模型相关配置 根据自己的实际情况进行调整
-OPENAI_API_BASE = "https://api.wlai.vip/v1"
-OPENAI_CHAT_API_KEY = "sk-FQZgr4fvjIv8iKaTR8QgtvEEhdS6CfFcNI1EHUTiVqD0R4hr"
+OPENAI_API_BASE = "https://api.openai.com/v1"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_CHAT_MODEL = "gpt-4o-mini"
 # 非gpt大模型相关配置(oneapi方案 通义千问为例) 根据自己的实际情况进行调整
 ONEAPI_API_BASE = "http://139.224.72.218:3000/v1"
@@ -46,7 +47,7 @@ def my_llm(llmType):
         # 实例化一个LLM客户端对象
         llm = LLM(
             base_url=OPENAI_API_BASE,  # 请求的API服务地址
-            api_key=OPENAI_CHAT_API_KEY,  # API Key
+            api_key=OPENAI_API_KEY,  # API Key
             model=OPENAI_CHAT_MODEL,  # 本次使用的模型
             # temperature=0.7,# 发散的程度，一般为0
             # timeout=None,# 服务请求超时

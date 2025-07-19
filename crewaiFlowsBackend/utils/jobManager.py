@@ -5,6 +5,10 @@ from typing import List
 from threading import Lock
 import mysql.connector
 from mysql.connector import Error
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # 设置日志记录
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,7 +22,7 @@ def get_db_connection():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='Aa112233@',
+            password=os.getenv("MYSQL_PASSWORD"),
             database='crewai'
         )
         if conn.is_connected():
